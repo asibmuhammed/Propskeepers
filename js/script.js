@@ -39,22 +39,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // Team Tilt Effect
+    if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll('.team-member'), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            'max-glare': 0.2,
+            scale: 1.05
+        });
+    }
 
 });
 
+// WhatsApp Form Submission (Global Scope)
+function sendToWhatsapp() {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const phone = document.getElementById('contactPhone').value;
+    const message = document.getElementById('contactMessage').value;
 
-// Team Tilt Effect
-VanillaTilt.init(document.querySelectorAll('.team-member'), {
-    max: 15,
-    speed: 400,
-    glare: true,
-    'max-glare': 0.2,
-    scale: 1.05
-});
+    if (!name || !message) {
+        alert("Please provide your name and message.");
+        return;
+    }
+
+    const whatsappMessage = `*New Enquiry from Website*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Phone:* ${phone}%0A*Message:* ${message}`;
+
+    // Using the primary phone number from the footer/contact info
+    const phoneNumber = "918606531933";
+
+    const url = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+    window.open(url, '_blank');
+}
