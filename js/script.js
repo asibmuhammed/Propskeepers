@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.padding = '10px 0';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.padding = '20px 0';
+            navbar.classList.remove('scrolled');
         }
     });
 
