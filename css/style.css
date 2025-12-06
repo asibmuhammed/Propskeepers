@@ -364,12 +364,14 @@ body {
 }
 
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
 }
 
 .team-member {
+    flex: 0 1 300px;
     background: rgba(255, 255, 255, 0.5);
     /* Lighter glass */
     backdrop-filter: blur(8px);
