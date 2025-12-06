@@ -48,3 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+
+// Team Tilt Effect
+VanillaTilt.init(document.querySelectorAll('.team-member'), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    'max-glare': 0.2,
+    scale: 1.05
+});
