@@ -352,6 +352,29 @@ body {
     line-height: 1.7;
 }
 
+.cta-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 60px;
+    box-shadow: 0 10px 40px rgba(15, 110, 110, 0.3);
+}
+
+.cta-banner h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.cta-banner p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.95;
+}
+
 /* Team */
 .team {
     /* No bg color change, keep minimalist flow */
