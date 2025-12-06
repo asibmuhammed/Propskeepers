@@ -1,0 +1,515 @@
+:root {
+    --primary: #0F6E6E;
+    --primary-light: #168d8d;
+    --primary-soft: rgba(15, 110, 110, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    --text: #334155;
+    --text-light: #64748b;
+    --bg-body: #f0f4f8;
+    /* Soft blue-grey background to make glass pop */
+    --gradient-bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --radius: 24px;
+    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text);
+    background: var(--bg-body);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(15, 110, 110, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 110, 110, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 14px 34px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid transparent;
+    box-shadow: 0 4px 15px rgba(15, 110, 110, 0.2);
+}
+
+.btn-primary:hover {
+    background: #0a5252;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(15, 110, 110, 0.3);
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Slightly more opaque for nav */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 100px;
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    padding: 15px 40px;
+    transition: var(--transition);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    margin-left: 35px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a:not(.btn-primary)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-links a:not(.btn-primary):hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links .btn-primary {
+    margin-left: 35px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text);
+    margin: 6px 0;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-bottom: 0;
+    /* Removing margin to let sections flow */
+}
+
+/* Adding a custom shape divider or just letting it be full screen */
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    /* Slight angle */
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    /* Slight zoom for parallax feel if we added it */
+}
+
+.hero-bg .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(15, 110, 110, 0.85), rgba(15, 110, 110, 0.4));
+    backdrop-filter: blur(2px);
+}
+
+.hero-content {
+    max-width: 700px;
+    margin-top: 60px;
+    /* Offset for fixed nav */
+    padding-left: 20px;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content p {
+    font-size: 1.35rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    font-weight: 300;
+    max-width: 550px;
+}
+
+.hero-content .btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hero-content .btn-primary:hover {
+    background: white;
+    color: var(--primary);
+}
+
+/* Sections */
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    color: var(--text);
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.service-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(31, 38, 135, 0.15);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.card-img {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), transparent);
+    opacity: 0.1;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.service-card:hover .card-img img {
+    transform: scale(1.08);
+}
+
+.card-body {
+    padding: 40px 30px;
+}
+
+.card-body h3 {
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.card-body p {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Team */
+.team {
+    /* No bg color change, keep minimalist flow */
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.team-member {
+    background: rgba(255, 255, 255, 0.5);
+    /* Lighter glass */
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 40px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.team-member:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 15px 35px rgba(15, 110, 110, 0.08);
+}
+
+.team-member h3 {
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    color: var(--text);
+}
+
+.team-member .role {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: var(--primary-soft);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.team-member .bio {
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+/* Footer */
+.footer {
+    background: var(--primary);
+    color: white;
+    padding: 100px 0 40px;
+    margin-top: 60px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+}
+
+.footer-brand h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.footer-content {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 60px;
+    margin-bottom: 30px;
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.15s;
+}
+
+.delay-2 {
+    transition-delay: 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .navbar {
+        width: 95%;
+        padding: 15px 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        border-radius: 20px;
+        top: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        /* Below nav */
+        left: 0;
+        /* Changed from right logic to simple container */
+        width: 100%;
+        height: auto;
+        background: transparent;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-20px);
+        padding: 20px;
+        transition: var(--transition);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        margin: 15px 0;
+        font-size: 1.1rem;
+    }
+
+    .nav-links .btn-primary {
+        margin: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-bg {
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+    }
+}
