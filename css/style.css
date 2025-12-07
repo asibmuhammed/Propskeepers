@@ -263,13 +263,13 @@ body {
 
 /* Sections */
 .section {
-    padding: 100px 0;
+    padding: 60px 0;
     position: relative;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
